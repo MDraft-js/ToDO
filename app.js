@@ -103,6 +103,7 @@ const tasks = [
       '--input-focus-box-shadow': '0 0 0 0.2rem rgba(141, 143, 146, 0.25)',
     },
   };
+  let lastSelectedTheme = localStorage.getItem('ToDO_theme') || 'default';
   
   const listcontainer = document.querySelector(".tasks-list-section ", ".list-group");
   //renderalltasks(ObjOfTasks);
@@ -112,6 +113,7 @@ const tasks = [
   const inputbody = form.elements['body'];
   const themeselect = document.getElementById('themeSelect'); 
 
+  themeset(lastSelectedTheme);
   form.addEventListener('submit', btnsubmit);
   listcontainer.addEventListener('click', btndelete);
   themeselect.addEventListener('change', themeselectcheck)
@@ -219,6 +221,7 @@ function btnsubmit(e) {
     const isConfirmed = confirm(`Вы действительно хотите изменить тему:${selectedTheme}`)
     if (!isConfirmed) return;
     themeset(selectedTheme);
+    localStorage.setItem('ToDO_theme', selectedTheme);
   }
 
   function themeset(name) {
